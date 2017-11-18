@@ -43,19 +43,23 @@ function updateIndicator(){
   //call to update the chart data and recalculate the 
   myChart.data.datasets[4].data = indicatorData;
   myChart.update();
+
+  document.getElementById('tweet_coeff1').value = tweetCoefs[0];
+  document.getElementById('tweet_coeff2').value = tweetCoefs[1];
+  document.getElementById('tweet_coeff3').value = tweetCoefs[2];
 }
 
 var priceDataSet = {
   data: brownian(50,200,5000,0.2),
   label: "BTC Price",
-  borderColor: "#0052C2",
+  borderColor: "#ffea00",
   fill: false,
 }
 
 var tweetsDataSet = {
   data: quadraticBump(50,15,4200,2500,300),
   label: "Tweet Volume",
-  borderColor: "#D4001A",
+  borderColor: "#0052C2",
   fill: false,
 }
 
@@ -63,21 +67,21 @@ var tweetsDataSet = {
 var retweetsDataSet = {
   data: brownian(50,200,1500,0.15),
   label: "Retweet Volume",
-  borderColor: "#D4001A",
+  borderColor: "#003b8f",
   fill: false,
 }
 
 var favDataSet = {
   data: brownian(50,200,500,0.1),
   label: "Fav Volume",
-  borderColor: "#D4001A",
+  borderColor: "#4794ff",
   fill: false,
 }
 
 var indicator = {
   data: indicatorData,
   label: "Indicator",
-  borderColor: "black",
+  borderColor: "#9500cb",
   fill: false,
 }
 
