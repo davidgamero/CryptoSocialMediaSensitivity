@@ -1,346 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Cryptic Trend</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bootstrap.min.css">
-<<<<<<< HEAD
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.1.11.1.js"></script>
-  <script src="bootstrap.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
-=======
-  <script src="jquery-3.2.1.slim.js"></script>
-  <script src="bootstrap.min.js"></script>
-    <script src="bootstrap-slider.js"></script>
-    <link rel="stylesheet" href="bootstrap-slider.css">
->>>>>>> e6d83d5805dc62f38f0effd27dd991aae5d0f975
-  <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1500px}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cryptic Trend</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="./bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="./sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;} 
-    }
-  </style>
+    <link href="./styles.css" rel="stylesheet">
     
     
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <!-- Chart Includes -->
     <script src="./statsMaker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="./jquery.min.js"></script>
+    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
     <style>
     canvas{
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
     }
+        
+    .row-no-padding {
+      [class*="col-"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+        
     </style>
     
+    
 
-<script>
+    
+    <script>
 
     function reviseCoefficient(){
         tweet_coeff1 = document.getElementById('tweet_coeff1').value;
         tweet_coeff2 = document.getElementById('tweet_coeff2').value;
-        tweet_coeff3 = document.getElementById('tweet_coeff3').value;
+        //tweet_coeff3 = document.getElementById('tweet_coeff3').value;
         
         tweetCoefs[0] = parseFloat(tweet_coeff1);
         tweetCoefs[1] = parseFloat(tweet_coeff2);
-        tweetCoefs[2] = parseFloat(tweet_coeff3);
+        //tweetCoefs[2] = parseFloat(tweet_coeff3);
         
         fav_coeff1 = document.getElementById('fav_coeff1').value;
         fav_coeff2 = document.getElementById('fav_coeff2').value;
-        fav_coeff3 = document.getElementById('fav_coeff3').value
+        //fav_coeff3 = document.getElementById('fav_coeff3').value
         
         favCoefs[0] = parseFloat(fav_coeff1);
         favCoefs[1] = parseFloat(fav_coeff2);
-        favCoefs[2] = parseInt(fav_coeff3);
+        //favCoefs[2] = parseInt(fav_coeff3);
         
         RT_coeff1 = document.getElementById('RT_coeff1').value;
         RT_coeff2 = document.getElementById('RT_coeff2').value;
-        RT_coeff3 = document.getElementById('RT_coeff3').value;
+        //RT_coeff3 = document.getElementById('RT_coeff3').value;
         
         retweetCoefs[0] = parseFloat(RT_coeff1);
         retweetCoefs[1] = parseFloat(RT_coeff2);
-        retweetCoefs[2] = parseInt(RT_coeff3);
+        //retweetCoefs[2] = parseInt(RT_coeff3);
         
-        
+        offset = document.getElementById('offset').value;
+        tweetCoefs[2] = parseFloat(offset);
+        favCoefs[2] = parseFloat(offset);
+        retweetCoefs[2] = parseFloat(offset);
         
         updateIndicator();
 
     }
     
-</script>
-    
-<<<<<<< HEAD
-=======
+    </script>
     
     
     
-    
-    
-    
->>>>>>> e6d83d5805dc62f38f0effd27dd991aae5d0f975
+
 </head>
+
 <body>
-<div class="title-bar">
-  <h4 class="title-bar-text">Twitter Social Corelation Index Graph</h4>
-</div>
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-8 sidenav">
-<<<<<<< HEAD
-=======
-      <h4>Twitter Social Corelation Index Graph</h4>
-        <div class="row">
-            <div class="col-sm-6">
-                <table>
-                    <tr>
-                    <td width = 50%>
-                       Currency: 
-                    </td>
-                        <td>
-                            <div class="form-group">
-                              <select class="form-control" id="currency">
-                                <option>Bitcoin</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                              </select>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->    
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
                             </div>
-                        </td>
-                    </tr>
-                
-                </table>
-            </div>
-            <div class="col-sm-6">
-               <h4 id = 'social-corelation-index'> Social Corelation Index: 1.4 </h4>
-            </div>
-        
-        </div>
->>>>>>> e6d83d5805dc62f38f0effd27dd991aae5d0f975
-      <div style="width:90%;">
-        
-          <canvas id="myChart"></canvas>
-      </div>
-        <div class="row" style="text-align:center">
-            <input id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
-        </div>
-        <div class="row" style="text-align:center">
-            <span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>
-        </div>
-        
-        <script>
-        
-        var slider = new Slider("#ex6");
-            slider.on("slide", function(sliderValue) {
-	           document.getElementById("ex6SliderVal").textContent = sliderValue;
-            });
-        </script>
-    </div>
-      
-      <div class="col-sm-4">
-          <ul class="nav nav-tabs">
-                <li class="active">
-                    <a data-toggle="tab" href="#weights-menu">Indexes and Weights</a>
-                </li>
-                <li lass="active"><a data-toggle="tab" href="#filter-menu">Filters</a></li>
-        </ul>
-          
-          <div clas="tab-content">
-                <div id="weights-menu" class="tab-pane fade in active">
-                  <div class="table-responsive">     
-                  <table class="table">
-                    <tr>
-                      <th colspan=6>
-                          <h4>Index and Weights</h4>
-                      </th>
-
-                    </tr>
-
-                    <form>
-                     <tr>
-                      <td width="30%">
-
-                            <div class="form-group">
-
-                            <input type="number" class="form-control" id="tweet_coeff1" onchange=reviseCoefficient()  >
-                          </div>          
-
-                     </td>
-                     <td width="20%">
-                        Tweets:
-                     </td>
-
-                     <td width="5%">
-                        ^
-                     </td>
-
-                     <td width="30%">
-                        <div class="form-group">
-                            <input type="number" class="form-control" id="tweet_coeff2" onchange=reviseCoefficient()>
-                        </div> 
-
-                     </td>
-                    </tr>
-                    <tr>
-                      <td width="30%">
-
-                            <div class="form-group">
-
-                            <input type="number" class="form-control" id="fav_coeff1" onchange=reviseCoefficient() >
-                          </div>          
-
-                     </td>
-                     <td width="20%">
-                        Favourites
-                     </td>
-
-                     <td width="5%">
-                        ^
-                     </td>
-
-                     <td width="30%">
-                        <div class="form-group">
-                            <input type="number" class="form-control" id="fav_coeff2" onchange=reviseCoefficient()>
-                        </div> 
-
-                     </td>
-                    </tr>
-                    <tr>
-                      <td width="30%">
-
-                            <div class="form-group">
-
-                            <input type="number" class="form-control" id="RT_coeff1" onchange=reviseCoefficient()>
-                          </div>          
-
-                     </td>
-                     <td width="20%">
-                        Retweets
-                     </td>
-
-                     <td width="5%">
-                        ^
-                     </td>
-
-                     <td width="30%">
-                        <div class="form-group">
-                            <input type="number" class="form-control" id="RT_coeff2" onchange=reviseCoefficient() >
-                        </div> 
-
-                     </td>
-                    </tr>
-                    <tr>
-                        <td colspan=2>
-                            Offset:
-                        </td>
-                        <td colspan=2>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="offset" onchange=reviseCoefficient() >
-                            </div> 
-                        </td>
-                    </tr>
-                      </form>
-                  </table>   
-                  </div>  
-                </div>
-              
-              <div id="filter-menu" class="tab-pane fade">
-                <div class="table-responsive">     
-                  <table class="table">
-                    
-                    <tr>
-                        <th colspan=2>Filter:</th>
-                    </tr>
-                    <tr>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Short Term Charts</a>
+                                </li>
+                                <li>
+                                    <a href="#">Long Term Charts</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Twitter Raw Data</a>
+                        </li>
                         
-                        <td width = '50%'>
-                            Min Followers:
-                        </td>
-                        <td width = '50%'>
-                            <div class="form-group">
-                            <input type="number" class="form-control" id="follower-filter" onchange=reviseFilter()  >
-                            </div>   
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        Min Favourites:
-                        </td>
-                        <td>
-                          <div class="form-group">
-                            <input type="number" class="form-control" id="favourites-filter" onchange=reviseFilter()  >
-                          </div>   
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        Min Retweets:
-                        </td> 
-                        <td>
-                            <div class="form-group">
-                            <input type="number" class="form-control" id="retweets-filter" onchange=reviseFilter()  >
-                            </div> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        Verified:
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <input type="checkbox" class="form-control" id="verified-filter" onchange=reviseFilter()  >
-                            </div> 
-                        </td>
-                    </tr>
-                    
-                    
-                </table>
-              </div>
-
-
-
-
+                        
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
             </div>
-          
-      </div>
-        
+            
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Twitter Social Corelation Index Graph</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6 text-right">
+                                    <i class="fa  fa-twitter  fa-5x"></i>
+                                </div>
+                                <div class="col-xs-6 text-centre">
+                                    <div class="huge">1.14</div>
+                                    <div>Social Correlation Index</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa  fa-retweet   fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">124</div>
+                                    <div>Trending Tweets</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa  fa-globe   fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">13,000</div>
+                                    <div>Estimated Reach</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Social Correlation Chart
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Select Currency
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">Bitcoin</a>
+                                        </li>
+                                        <li><a href="#">Currency 2</a>
+                                        </li>
+                                        <li><a href="#">Currency 3</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Remove all filters</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div style="width:100%;">
+                              <canvas id="myChart"></canvas>
+                          </div>
+                        <!-- /.panel-body -->
+                    </div>
+                
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-8 -->
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell fa-fw"></i> Chart Filters
+                            <div class="pull-right">
+                                
+                                <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                Select Filters
+                                <span class="caret"></span>
+                                </button>
+                                
+                                <ul class="dropdown-menu pull-right" role="menu" >
+                                    <li class="active" id ="weights-dropdown"><a href="#weights-menu" data-toggle="tab">Indexes / Weights</a>
+                                    </li>
+                                    <li><a href="#filter-menu" data-toggle="tab">Filters</a>
+                                    </li>
+                                </ul>
+                                </div>
+                            </div>
+                                
+                            <script>
+                                $(".dropdown-menu").on("click", function(){
+                                  $(".dropdown-menu").find(".active").removeClass("active");
+                                  $(this).parent().addClass("active");
+                                });
+                                </script>    
+                                
+                                <!--
+                                <ul class="nav nav-tabs">
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Filters
+                                        <span class="caret"></span></a>
+                                        <ul class="dropdown-menu pull-right" role="menu" >
+                                            <li><a href="#weights-menu" data-toggle="tab">Indexes / Weights</a>
+                                            </li>
+                                            <li><a href="#filter-menu" data-toggle="tab">Filters</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+-->
+                                
+                                <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="tab-content">
+                            <div id="weights-menu" class="tab-pane fade in active">
+                            <div class="list-group" >
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-4" style="padding-right: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="tweet_coeff1" onchange=reviseCoefficient()  >
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 text-center" style="padding-left: 0 !important;padding-right: 0 !important;">
+                                            <div class="small text-muted"> x Tweets ^</div>
+                                        </div>
+                                        <div class="col-xs-4" style="padding-left: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="tweet_coeff2" onchange=reviseCoefficient()  >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-4" style="padding-right: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="fav_coeff1" onchange=reviseCoefficient()  >
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 text-center" style="padding-left: 0 !important;padding-right: 0 !important;">
+                                            <div class="small"> x Favourites ^</div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group" style="padding-left: 0 !important;">
+                                                <input type="number" class="form-control" id="fav_coeff2" onchange=reviseCoefficient()  >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-4" style="padding-right: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="RT_coeff1" onchange=reviseCoefficient()  >
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 text-center" style="padding-left: 0 !important;padding-right: 0 !important;">
+                                            <div class="small"> x Retweets ^</div>
+                                        </div>
+                                        <div class="col-xs-4" style="padding-left: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="RT_coeff2" onchange=reviseCoefficient()  >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            Overall Offset:
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="offset" onchange=reviseCoefficient()  >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                              
+                                
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-tasks fa-fw"></i> Last Update
+                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                    </span>
+                                </a>
+                                
+                                </div>
+                            </div>
+                            <!-- /.list-group (weights-menu) -->
+                            <div class="tab-pane fade in" id="filter-menu">
+                            <div class="list-group" >
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-6" >
+                                            <div class="center-block"> Min Followers: </div>
+                                        </div>
+                                        <div class="col-xs-6" style="padding-left: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="follower-filter" onchange=reviseFilter()  >
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-6" >
+                                            <div class="center-block"> Min Favourites: </div>
+                                        </div>
+                                        <div class="col-xs-6" style="padding-left: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="favourites-filter" onchange=reviseFilter()  >
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-6" >
+                                            <div class="center-block"> Min Retweets: </div>
+                                        </div>
+                                        <div class="col-xs-6" style="padding-left: 0 !important;">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="retweets-filter" onchange=reviseFilter()  >
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-6" >
+                                            <div class="center-block"> Verified: </div>
+                                        </div>
+                                        <div class="col-xs-6 pull-left" style="padding-left: 0 !important;">
+                                            <div class="form-group">
+                                                
+                                                <input type="checkbox" class="form-control" id="verified-filter" align="left" onchange=reviseFilter()  >
+                                                
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                              
+                                
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-tasks fa-fw"></i> Last Update
+                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                    </span>
+                                </a>
+                                </div>
+                            </div>
+                            <!-- /.list-group (filter-menu) -->
+                            
+                            
+                            
+                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                        </div>
+                        <!-- /.panel-body -->
+                                
+                                    
+                                
+                        </div>
+                            
+                        </div>
+                        
+                
+                        
+                    </div>
+                    
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
 
-      
-  </div>
-</div>
- 
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./bootstrap.min.js"></script>
+    
+    <!-- Custom Theme JavaScript -->
+    <script src="./sb-admin-2.js"></script>
+    
     
 
-    
-
-    
-    
-
-
-<footer class="container-fluid">
-  <p>Footer Text</p>
-</footer>
 
 </body>
+
 </html>

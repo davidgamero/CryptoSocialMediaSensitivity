@@ -46,22 +46,20 @@ function updateIndicator(){
 
   document.getElementById('tweet_coeff1').value = tweetCoefs[0];
   document.getElementById('tweet_coeff2').value = tweetCoefs[1];
-  //document.getElementById('tweet_coeff3').value = tweetCoefs[2];
+  document.getElementById('tweet_coeff3').value = tweetCoefs[2];
 
   document.getElementById('fav_coeff1').value = favCoefs[0];
   document.getElementById('fav_coeff2').value = favCoefs[1];
-  //document.getElementById('fav_coeff3').value = favCoefs[2];
+  document.getElementById('fav_coeff3').value = favCoefs[2];
     
   document.getElementById('RT_coeff1').value = retweetCoefs[0];
   document.getElementById('RT_coeff2').value = retweetCoefs[1];
-  //document.getElementById('RT_coeff3').value = retweetCoefs[2];
-    
-  document.getElementById('offset').value = (tweetCoefs[2] + favCoefs[2] + retweetCoefs[2])/3;
+  document.getElementById('RT_coeff3').value = retweetCoefs[2];
     
 }
 
 var priceDataSet = {
-  data: brownian(50,200,500,0.15),
+  data: brownian(50,200,5000,0.2),
   label: "BTC Price",
   borderColor: "#ffea00",
   fill: false,
@@ -83,7 +81,7 @@ var retweetsDataSet = {
 }
 
 var favDataSet = {
-  data: brownian(50,200,500,0.1),
+  data: brownian(50,200,500,0.15),
   label: "Fav Volume",
   borderColor: "#4794ff",
   fill: false,
