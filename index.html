@@ -5,8 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.1.11.1.js"></script>
+  <script src="jquery-3.2.1.slim.js"></script>
   <script src="bootstrap.min.js"></script>
+    <script src="bootstrap-slider.js"></script>
+    <link rel="stylesheet" href="bootstrap-slider.css">
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
@@ -55,15 +57,38 @@
         tweet_coeff2 = document.getElementById('tweet_coeff2').value;
         tweet_coeff3 = document.getElementById('tweet_coeff3').value;
         
-        tweetCoefs[0] = parseInt(tweet_coeff1);
-        tweetCoefs[1] = parseInt(tweet_coeff2);
-        tweetCoefs[2] = parseInt(tweet_coeff3);
+        tweetCoefs[0] = parseFloat(tweet_coeff1);
+        tweetCoefs[1] = parseFloat(tweet_coeff2);
+        tweetCoefs[2] = parseFloat(tweet_coeff3);
+        
+        fav_coeff1 = document.getElementById('fav_coeff1').value;
+        fav_coeff2 = document.getElementById('fav_coeff2').value;
+        fav_coeff3 = document.getElementById('fav_coeff3').value
+        
+        favCoefs[0] = parseFloat(fav_coeff1);
+        favCoefs[1] = parseFloat(fav_coeff2);
+        favCoefs[2] = parseInt(fav_coeff3);
+        
+        RT_coeff1 = document.getElementById('RT_coeff1').value;
+        RT_coeff2 = document.getElementById('RT_coeff2').value;
+        RT_coeff3 = document.getElementById('RT_coeff3').value;
+        
+        retweetCoefs[0] = parseFloat(RT_coeff1);
+        retweetCoefs[1] = parseFloat(RT_coeff2);
+        retweetCoefs[2] = parseInt(RT_coeff3);
+        
+        
         
         updateIndicator();
 
     }
     
 </script>
+    
+    
+    
+    
+    
     
     
 </head>
@@ -73,142 +98,225 @@
   <div class="row content">
     <div class="col-sm-8 sidenav">
       <h4>Twitter Social Corelation Index Graph</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <table>
+                    <tr>
+                    <td width = 50%>
+                       Currency: 
+                    </td>
+                        <td>
+                            <div class="form-group">
+                              <select class="form-control" id="currency">
+                                <option>Bitcoin</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                              </select>
+                            </div>
+                        </td>
+                    </tr>
+                
+                </table>
+            </div>
+            <div class="col-sm-6">
+               <h4 id = 'social-corelation-index'> Social Corelation Index: 1.4 </h4>
+            </div>
+        
+        </div>
       <div style="width:90%;">
           <canvas id="myChart"></canvas>
-      </div>  
+      </div>
+        <div class="row" style="text-align:center">
+            <input id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
+        </div>
+        <div class="row" style="text-align:center">
+            <span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>
+        </div>
+        
+        <script>
+        
+        var slider = new Slider("#ex6");
+            slider.on("slide", function(sliderValue) {
+	           document.getElementById("ex6SliderVal").textContent = sliderValue;
+            });
+        </script>
     </div>
       
       <div class="col-sm-4">
-      <div class="table-responsive">  
+          <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#weights-menu">Indexes and Weights</a>
+                </li>
+                <li lass="active"><a data-toggle="tab" href="#filter-menu">Filters</a></li>
+        </ul>
           
-      <table class="table">
-        <tr>
-          <td colspan=6>
-              <h4>Index and Weights</h4>
-          </td>
-          
-        </tr>
-          
-        <form>
-         <tr>
-          <td width="20%">
-             
-                <div class="form-group">
-                
-                <input type="number" class="form-control" id="tweet_coeff1" onchange=reviseCoefficient()  >
-              </div>          
+          <div clas="tab-content">
+                <div id="weights-menu" class="tab-pane fade in active">
+                  <div class="table-responsive">     
+                  <table class="table">
+                    <tr>
+                      <th colspan=6>
+                          <h4>Index and Weights</h4>
+                      </th>
+
+                    </tr>
+
+                    <form>
+                     <tr>
+                      <td width="30%">
+
+                            <div class="form-group">
+
+                            <input type="number" class="form-control" id="tweet_coeff1" onchange=reviseCoefficient()  >
+                          </div>          
+
+                     </td>
+                     <td width="20%">
+                        Tweets:
+                     </td>
+
+                     <td width="5%">
+                        ^
+                     </td>
+
+                     <td width="30%">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="tweet_coeff2" onchange=reviseCoefficient()>
+                        </div> 
+
+                     </td>
+                    </tr>
+                    <tr>
+                      <td width="30%">
+
+                            <div class="form-group">
+
+                            <input type="number" class="form-control" id="fav_coeff1" onchange=reviseCoefficient() >
+                          </div>          
+
+                     </td>
+                     <td width="20%">
+                        Favourites
+                     </td>
+
+                     <td width="5%">
+                        ^
+                     </td>
+
+                     <td width="30%">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="fav_coeff2" onchange=reviseCoefficient()>
+                        </div> 
+
+                     </td>
+                    </tr>
+                    <tr>
+                      <td width="30%">
+
+                            <div class="form-group">
+
+                            <input type="number" class="form-control" id="RT_coeff1" onchange=reviseCoefficient()>
+                          </div>          
+
+                     </td>
+                     <td width="20%">
+                        Retweets
+                     </td>
+
+                     <td width="5%">
+                        ^
+                     </td>
+
+                     <td width="30%">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="RT_coeff2" onchange=reviseCoefficient() >
+                        </div> 
+
+                     </td>
+                    </tr>
+                    <tr>
+                        <td colspan=2>
+                            Offset:
+                        </td>
+                        <td colspan=2>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="offset" onchange=reviseCoefficient() >
+                            </div> 
+                        </td>
+                    </tr>
+                      </form>
+                  </table>   
+                  </div>  
+                </div>
               
-         </td>
-         <td width="20%">
-            Tweets:
-         </td>
-             
-         <td width="10%">
-            ^
-         </td>
-             
-         <td width="20%">
-            <div class="form-group">
-                <input type="number" class="form-control" id="tweet_coeff2" onchange=reviseCoefficient()>
-            </div> 
+              <div id="filter-menu" class="tab-pane fade">
+                <div class="table-responsive">     
+                  <table class="table">
+                    
+                    <tr>
+                        <th colspan=2>Filter:</th>
+                    </tr>
+                    <tr>
+                        
+                        <td width = '50%'>
+                            With Followers:
+                        </td>
+                        <td width = '50%'>
+                            <div class="form-group">
+                            <input type="number" class="form-control" id="follower-filter" onchange=reviseFilter()  >
+                            </div>   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        With Favourites:
+                        </td>
+                        <td>
+                          <div class="form-group">
+                            <input type="number" class="form-control" id="favourites-filter" onchange=reviseFilter()  >
+                          </div>   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Min Retweets:
+                        </td> 
+                        <td>
+                            <div class="form-group">
+                            <input type="number" class="form-control" id="retweets-filter" onchange=reviseFilter()  >
+                            </div> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Verified:
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="checkbox" class="form-control" id="verified-filter" onchange=reviseFilter()  >
+                            </div> 
+                        </td>
+                    </tr>
+                    
+                    
+                </table>
+              </div>
 
-         </td>
-         <td width="10%">
-         +
-         </td>
-            
-         <td width="20%">
-            <div class="form-group">
-                <input type="number" class="form-control" id="tweet_coeff3" onchange=reviseCoefficient()>
-            </div> 
 
-         </td>
-        </tr>
-        <tr>
-          <td width="20%">
-             
-                <div class="form-group">
-                
-                <input type="number" class="form-control" id="followers_coeff1" onchange=reviseCoefficient() >
-              </div>          
-              
-         </td>
-         <td width="20%">
-            Tweets:
-         </td>
-            
-         <td width="10%">
-            ^
-         </td>
-             
-         <td width="20%">
-            <div class="form-group">
-                <input type="number" class="form-control" id="followers_coeff2" >
-            </div> 
 
-         </td>
-         <td width="10%">
-         +
-         </td>
-            
-         <td width="20%">
-            <div class="form-group">
-                <input type="number" class="form-control" id="followers_coeff3" >
-            </div> 
 
-         </td>
-        </tr>
-        <tr>
-          <td width="20%">
-             
-                <div class="form-group">
-                
-                <input type="number" class="form-control" id="RT_coeff1" >
-              </div>          
-              
-         </td>
-         <td width="20%">
-            Followers
-         </td>
-            
-         <td width="10%">
-            ^
-         </td>
-             
-         <td width="20%">
-            <div class="form-group">
-                <input type="number" class="form-control" id="RT_coeff2" >
-            </div> 
-
-         </td>
-         <td width="10%">
-         +
-         </td>
-            
-         <td width="20%">
-            <div class="form-group">
-                <input type="number" class="form-control" id="RT_coeff3" >
-            </div> 
-
-         </td>
-        </tr>
-        
-        
-          </form>
+            </div>
           
-      
-      </table>  
-          
-        </div>
       </div>
         
 
+      
   </div>
 </div>
  
     
-    
-    
+
     
 
     
