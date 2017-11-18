@@ -72,7 +72,7 @@ var retweetsDataSet = {
 }
 
 var favDataSet = {
-  data: brownian(50,200,500,0.1),
+  data: brownian(50,200,500,0.15),
   label: "Fav Volume",
   borderColor: "#4794ff",
   fill: false,

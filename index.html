@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Website Example</title>
+  <title>Cryptic Trend</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.1.11.1.js"></script>
   <script src="bootstrap.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
@@ -37,7 +39,6 @@
     
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="./statsMaker.js"></script>
     <style>
     canvas{
@@ -65,15 +66,16 @@
     
 </script>
     
-    
 </head>
 <body>
-
+<div class="title-bar">
+  <h4 class="title-bar-text">Twitter Social Corelation Index Graph</h4>
+</div>
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-8 sidenav">
-      <h4>Twitter Social Corelation Index Graph</h4>
       <div style="width:90%;">
+        
           <canvas id="myChart"></canvas>
       </div>  
     </div>

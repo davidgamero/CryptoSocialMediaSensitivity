@@ -1,3 +1,20 @@
 .main-plot{
 	background-color: black;
 }
+
+.title-bar{
+	background-color: #0052c2;
+	margin: 0px;
+	border: 10;
+	padding: 20px;
+	font-size: 25px;
+}
+
+.title-bar-text{
+	color: white;
+	margin: 0;
+}
+
+.body{
+}
+
