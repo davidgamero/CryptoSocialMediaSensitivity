@@ -130,6 +130,30 @@ function addArrays(a,b){
 }
 
 /**
+  Generate array of time labels
+*/
+function makeTimeLabel(dataLength,interval,isforward){
+  timeArray = [];
+  for (i=0; i<= dataLength; i++){
+          if (i % interval === 0){
+            timeArray.push(i);
+          } else {
+            timeArray.push('');
+          }
+  }
+
+  if (isforward === false){
+    timeArrayNegative = timeArray.map(
+      (x) => (x === '')?'':x*-1
+    );
+    return timeArrayNegative.reverse();
+
+  } else {
+    return timeArray
+  }
+}
+
+/**
   Return a number formatted to have two decimal places
 */
 function twoDec(num) {
@@ -275,7 +299,7 @@ window.onload = function(){
   myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: times,
+      labels: makeTimeLabel(timeRange,10,false),
       datasets: [
         priceDataSet,
         tweetsDataSet,
