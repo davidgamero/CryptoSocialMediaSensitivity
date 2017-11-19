@@ -7,9 +7,10 @@ var timeRange = 50;
 
 //coefficients for the indicator line in form A(val)^B+C
 var indicatorData = [];
-var tweetCoefs = [1,1,0];
-var retweetCoefs = [1,1,0];
-var favCoefs = [1,1,0];
+var tweetCoefs = [1,1];
+var retweetCoefs = [1,1];
+var favCoefs = [1,1];
+var indicatorOffset = 0;
 
 for(var t = 0; t <  timeRange; t = t + 1){
   times.push(t);
@@ -36,9 +37,10 @@ function quadraticBump(steps, center, height, min,tightness){
 function updateIndicator(){
   indicatorData = [];
   for(var t = 0; t <  timeRange; t = t + 1){
-    indicatorData.push( tweetCoefs[0]*Math.pow(tweetsDataSet.data[t],tweetCoefs[1])+tweetCoefs[2]+
-                    retweetCoefs[0]*Math.pow(retweetsDataSet.data[t],retweetCoefs[1])+retweetCoefs[2]+
-                    favCoefs[0]*Math.pow(favDataSet.data[t],favCoefs[1])+favCoefs[2]);
+    indicatorData.push( tweetCoefs[0]*Math.pow(tweetsDataSet.data[t],tweetCoefs[1])+
+                    retweetCoefs[0]*Math.pow(retweetsDataSet.data[t],retweetCoefs[1])+
+                    favCoefs[0]*Math.pow(favDataSet.data[t],favCoefs[1])+
+                    indicatorOffset);
   } 
   //call to update the chart data and recalculate the 
   myChart.data.datasets[4].data = indicatorData;
@@ -46,24 +48,21 @@ function updateIndicator(){
 
   document.getElementById('tweet_coeff1').value = tweetCoefs[0];
   document.getElementById('tweet_coeff2').value = tweetCoefs[1];
-  //document.getElementById('tweet_coeff3').value = tweetCoefs[2];
 
   document.getElementById('fav_coeff1').value = favCoefs[0];
   document.getElementById('fav_coeff2').value = favCoefs[1];
-  //document.getElementById('fav_coeff3').value = favCoefs[2];
     
   document.getElementById('RT_coeff1').value = retweetCoefs[0];
   document.getElementById('RT_coeff2').value = retweetCoefs[1];
-  //document.getElementById('RT_coeff3').value = retweetCoefs[2];
     
-  document.getElementById('offset').value = (tweetCoefs[2] + favCoefs[2] + retweetCoefs[2])/3;
+  document.getElementById('offset').value = indicatorOffset;
     
 }
 
 var priceDataSet = {
-  data: brownian(50,200,500,0.15),
+  data: brownian(50,200,5000,0.3),
   label: "BTC Price",
-  borderColor: "#ffea00",
+  borderColor: "#f0ad4e",
   fill: false,
 }
 
