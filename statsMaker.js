@@ -7,6 +7,8 @@ var timeRange = 50;
 
 //coefficients for the indicator line in form A(val)^B+C
 var indicatorData = [];
+var deltaIndicatorDataScaled = []
+
 var tweetCoefs = [1,1];
 var retweetCoefs = [1,1];
 var favCoefs = [1,1];
@@ -36,7 +38,9 @@ function quadraticBump(steps, center, height, min,tightness){
   return d;
 }
 
-//add random noise to a function
+/**
+  Add random noise to an array
+*/
 function addNoise(data,amplitude){
   return data.map((x) => x + Math.round(amplitude * 2 * Math.random() - amplitude));
 }
@@ -90,11 +94,30 @@ function getPearsonCorrelation(x, y) {
   return answer;
 }
 
+function arrayMax(a){
+  return a.reduce((x,y)=>{return Math.max(x,y)})
+}
 
+/**
+  Sum of array elements
+*/
 function arraySum(a){
+  if(!a){
+    console.error('Array sum of falsey value');
+  }
   return a.reduce(function(sum,value){return sum + value});
 }
 
+/**
+  Mean of an array
+*/
+function arrayMean(a){
+  return arraySum(a) / a.length;
+}
+
+/**
+  Element-wise array addition
+*/
 function addArrays(a,b){
   if(a.length != b.length){
     console.error('addArrays called on different length arrays');
@@ -106,9 +129,34 @@ function addArrays(a,b){
   return sum;
 }
 
+/**
+  Return a number formatted to have two decimal places
+*/
 function twoDec(num) {
     var with2Decimals = num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
     return with2Decimals;
+}
+
+/*
+Return the differences between adjacent elements
+*/
+function arrayDelta(a){
+  d = []; 
+  for(var i = 0; i < a.length-1; i++){
+    d.push(a[i+1] - a[i]);
+  }
+  return d;
+}
+
+/*
+Return the differences between adjacent elements squared
+*/
+function arrayDeltaSquared(a){
+  d = []; 
+  for(var i = 0; i < a.length-1; i++){
+    d.push(Math.pow(a[i+1] - a[i],2));
+  }
+  return d;
 }
 
 function updateIndicator(){
@@ -118,9 +166,18 @@ function updateIndicator(){
                     retweetCoefs[0]*Math.pow(retweetsDataSet.data[t],retweetCoefs[1])+
                     favCoefs[0]*Math.pow(favDataSet.data[t],favCoefs[1])+
                     indicatorOffset);
-  } 
-  //call to update the chart data and recalculate the 
+  }  
   myChart.data.datasets[4].data = indicatorData;
+
+  deltaIndicatorData = arrayDeltaSquared(indicatorData);
+
+  deltaIndicatorData_max = arrayMax(deltaPriceData);
+  indicatorData_max = arrayMax(priceDataSet.data);
+
+  deltaIndicatorDataScaled = deltaIndicatorData.map((x)=>{return x*(0.5 * indicatorData_max / deltaIndicatorData_max )});
+
+  myChart.data.datasets[6].data = deltaIndicatorDataScaled;
+
   myChart.update();
 
   document.getElementById('tweet_coeff1').value = tweetCoefs[0];
@@ -135,7 +192,8 @@ function updateIndicator(){
   document.getElementById('offset').value = indicatorOffset;
 
   document.getElementById('socialCorrIndex').innerHTML = twoDec(getPearsonCorrelation(priceDataSet.data,indicatorData));
-    
+  
+  document.getElementById('sensitivityIndex').innerHTML = twoDec(getPearsonCorrelation(deltaPriceDataScaled,deltaIndicatorDataScaled));
 }
 
 var priceDataSet = {
@@ -157,24 +215,50 @@ var tweetsDataSet = {
 
 
 var retweetsDataSet = {
-  data: brownian(50,200,1500,0.15),
+  data: addArrays(
+    brownian(50,200,1500,0.15),
+    quadraticBump(50,16,1200,0,220)
+    ),
   label: "Retweet Volume",
   borderColor: "#003b8f",
   fill: false,
 }
 
 var favDataSet = {
-  data: brownian(50,200,500,0.1),
+  data: addArrays(
+    brownian(50,100,500,0.1),
+    quadraticBump(50,17,500,0,100)
+    ),
   label: "Fav Volume",
   borderColor: "#4794ff",
   fill: false,
 }
 
-var indicator = {
+var indicatorDataSet = {
   data: indicatorData,
   label: "Indicator",
   borderColor: "#9500cb",
   fill: false,
+}
+
+deltaPriceData = arrayDeltaSquared(priceDataSet.data);
+deltaPriceData_max = arrayMax(deltaPriceData);
+priceData_max = arrayMax(priceDataSet.data);
+
+deltaPriceDataScaled = deltaPriceData.map((x)=>{return x*(0.5 * priceData_max / deltaPriceData_max )});
+
+var deltaPriceDataSet = {
+  data: deltaPriceDataScaled,
+  label: "Price Delta",
+  borderColor: "#5cb85c",
+  fill: true,
+}
+
+var deltaIndicatorDataSet = {
+  data: deltaIndicatorDataScaled,
+  label: "Indicator Delta",
+  borderColor: "#e27fef",
+  fill: true,
 }
 
 function setTrendingTweetsCounter(_val){
@@ -197,7 +281,9 @@ window.onload = function(){
         tweetsDataSet,
         retweetsDataSet,
         favDataSet,
-        indicator,
+        indicatorDataSet,
+        deltaPriceDataSet,
+        deltaIndicatorDataSet,
       ],
     }
   });
