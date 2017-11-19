@@ -403,7 +403,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="number" class="form-control" id="offset" onchange=reviseCoefficient() step="100" >
+                                                <input type="number" class="form-control" id="offset" onchange=reviseCoefficient() step="500" >
                                             </div>
                                         </div>
                                     </div>
@@ -506,7 +506,7 @@
             
             <div class="chat-panel panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-comments fa-fw"></i> Recent Tweets
+                            <i class="fa fa-comments fa-fw"></i> Recent Trending Tweets
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-chevron-down"></i>
@@ -733,10 +733,17 @@
         document.getElementById('created_at5').textContent=json.created_at['4'];
         document.getElementById('retweet5').textContent=json.RT['4'];
         document.getElementById('favourite5').textContent=json.favourites['4'];
-        
-        
-        
 
+    </script>
+    
+    <script type="text/javascript">
+        timeout = setTimeout("location.reload(true);",1000*60);
+    function disable_ar(){
+        clearTimeout(timeout);
+    }
+    function enable_ar(){
+        timeout = setTimeout("location.reload(true);",1000*60);
+    }
     </script>
     
     
