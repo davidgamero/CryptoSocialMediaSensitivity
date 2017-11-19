@@ -196,9 +196,9 @@ function updateIndicator(){
   deltaIndicatorData = arrayDeltaSquared(indicatorData);
 
   deltaIndicatorData_max = arrayMax(deltaPriceData);
-  indicatorData_max = arrayMax(priceDataSet.data);
+  priceData_max = arrayMax(priceDataSet.data);
 
-  deltaIndicatorDataScaled = deltaIndicatorData.map((x)=>{return x*(0.5 * indicatorData_max / deltaIndicatorData_max )});
+  deltaIndicatorDataScaled = deltaIndicatorData.map((x)=>{return x*(0.1 * priceData_max / deltaIndicatorData_max )});
 
   myChart.data.datasets[6].data = deltaIndicatorDataScaled;
 
@@ -231,7 +231,7 @@ var priceDataSet = {
 }
 
 var tweetsDataSet = {
-  data: addNoise(quadraticBump(50,15,4200,2500,300),200),
+  data: addNoise(quadraticBump(50,15,10000,6000,1000),200),
   label: "Tweet Volume",
   borderColor: "#0052C2",
   fill: false,
@@ -243,17 +243,17 @@ var retweetsDataSet = {
     brownian(50,200,1500,0.15),
     quadraticBump(50,16,1200,0,220)
     ),
-  label: "Retweet Volume",
+  label: "kRetweet Volume",
   borderColor: "#003b8f",
   fill: false,
 }
 
 var favDataSet = {
   data: addArrays(
-    brownian(50,100,500,0.1),
+    brownian(50,100,2500,0.1),
     quadraticBump(50,17,500,0,100)
     ),
-  label: "Fav Volume",
+  label: "10kFav Volume",
   borderColor: "#4794ff",
   fill: false,
 }
