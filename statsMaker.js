@@ -36,102 +36,74 @@ function quadraticBump(steps, center, height, min,tightness){
   return d;
 }
 
+//add random noise to a function
+function addNoise(data,amplitude){
+  return data.map((x) => x + Math.round(amplitude * 2 * Math.random() - amplitude));
+}
+
 /*
  *  Source: http://stevegardner.net/2012/06/11/javascript-code-to-calculate-the-pearson-correlation-coefficient/
  */
 function getPearsonCorrelation(x, y) {
-    var shortestArrayLength = 0;
-     
-    if(x.length == y.length) {
-        shortestArrayLength = x.length;
-    } else if(x.length > y.length) {
-        shortestArrayLength = y.length;
-        console.error('x has more items in it, the last ' + (x.length - shortestArrayLength) + ' item(s) will be ignored');
-    } else {
-        shortestArrayLength = x.length;
-        console.error('y has more items in it, the last ' + (y.length - shortestArrayLength) + ' item(s) will be ignored');
-    }
-  
-    var xy = [];
-    var x2 = [];
-    var y2 = [];
-  
-    for(var i=0; i<shortestArrayLength; i++) {
-        xy.push(x[i] * y[i]);
-        x2.push(x[i] * x[i]);
-        y2.push(y[i] * y[i]);
-    }
-  
-    var sum_x = 0;
-    var sum_y = 0;
-    var sum_xy = 0;
-    var sum_x2 = 0;
-    var sum_y2 = 0;
-  
-    for(var i=0; i< shortestArrayLength; i++) {
-        sum_x += x[i];
-        sum_y += y[i];
-        sum_xy += xy[i];
-        sum_x2 += x2[i];
-        sum_y2 += y2[i];
-    }
-  
-    var step1 = (shortestArrayLength * sum_xy) - (sum_x * sum_y);
-    var step2 = (shortestArrayLength * sum_x2) - (sum_x * sum_x);
-    var step3 = (shortestArrayLength * sum_y2) - (sum_y * sum_y);
-    var step4 = Math.sqrt(step2 * step3);
-    var answer = step1 / step4;
-  
-    return answer;
+  var shortestArrayLength = 0;
+   
+  if(x.length == y.length) {
+      shortestArrayLength = x.length;
+  } else if(x.length > y.length) {
+      shortestArrayLength = y.length;
+      console.error('x has more items in it, the last ' + (x.length - shortestArrayLength) + ' item(s) will be ignored');
+  } else {
+      shortestArrayLength = x.length;
+      console.error('y has more items in it, the last ' + (y.length - shortestArrayLength) + ' item(s) will be ignored');
   }
 
-/**
-Calculate the correlation coefficient for two line plot series
-*/
-function correlCoeff(a,b){
-  if(a.length != b.length){
-    console.log('ERROR: Failed to correlate different length arrays');
-    return
+  var xy = [];
+  var x2 = [];
+  var y2 = [];
+
+  for(var i=0; i<shortestArrayLength; i++) {
+      xy.push(x[i] * y[i]);
+      x2.push(x[i] * x[i]);
+      y2.push(y[i] * y[i]);
   }
 
-  //sample means
-  a_bar = parseFloat(arraySum(a)) / parseFloat(a.length);
-  b_bar = parseFloat(arraySum(b)) / parseFloat(b.length);
+  var sum_x = 0;
+  var sum_y = 0;
+  var sum_xy = 0;
+  var sum_x2 = 0;
+  var sum_y2 = 0;
 
-  //standard deviations
-  a_std = std(a);
-  b_std = std(b);
-
-  //standardized values
-  a_z = a.map((x) => (x - a_bar) / a_std);
-  b_z = b.map((x) => (x - b_bar) / b_std);
-
-  //multiply and sum elementwise
-  summ = 0; 
-  for(var i=0; i<a.length; i++){
-    summ += a_z[i] * b_z[i];
+  for(var i=0; i< shortestArrayLength; i++) {
+      sum_x += x[i];
+      sum_y += y[i];
+      sum_xy += xy[i];
+      sum_x2 += x2[i];
+      sum_y2 += y2[i];
   }
 
-  //divide by n-1
-  return summ/(a.length-1);
-}
+  var step1 = (shortestArrayLength * sum_xy) - (sum_x * sum_y);
+  var step2 = (shortestArrayLength * sum_x2) - (sum_x * sum_x);
+  var step3 = (shortestArrayLength * sum_y2) - (sum_y * sum_y);
+  var step4 = Math.sqrt(step2 * step3);
+  var answer = step1 / step4;
 
-/**
-Calculate the standard deviation of an array of data
-*/
-function std(a){
-  a_bar = parseFloat(arraySum(a)) / a.length;
-  sumOfDevSquares = 0;
-  for(var i = 0; i < a.length; i++){
-    sumOfDevSquares = sumOfDevSquares + Math.pow(a_bar - a[i], 2.0);
-    _std = Math.pow(sumOfDevSquares/(a.length-1.0),0.5);
-    return _std;
-  }
+  return answer;
 }
 
 
 function arraySum(a){
   return a.reduce(function(sum,value){return sum + value});
+}
+
+function addArrays(a,b){
+  if(a.length != b.length){
+    console.error('addArrays called on different length arrays');
+  }
+  sum = [];
+  for(var i = 0; i < a.length; i++){
+    sum.push(a[i] + b[i]);
+  }
+  return sum;
 }
 
 function twoDec(num) {
@@ -167,14 +139,17 @@ function updateIndicator(){
 }
 
 var priceDataSet = {
-  data: brownian(50,200,5000,0.3),
+  data: addArrays(
+    brownian(50,200,5000,0.3),
+    quadraticBump(50,16,2000,0,400)
+    ),
   label: "BTC Price",
   borderColor: "#f0ad4e",
   fill: false,
 }
 
 var tweetsDataSet = {
-  data: quadraticBump(50,15,4200,2500,300),
+  data: addNoise(quadraticBump(50,15,4200,2500,300),200),
   label: "Tweet Volume",
   borderColor: "#0052C2",
   fill: false,
