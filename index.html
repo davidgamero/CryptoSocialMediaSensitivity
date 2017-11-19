@@ -29,7 +29,25 @@
     
     <!-- jQuery -->
     <script src="./jquery.min.js"></script>
-    
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,23 +57,20 @@
     <![endif]-->
     
     <style>
-    canvas{
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-    }
-        
-    .row-no-padding {
-      [class*="col-"] {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+      canvas{
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
       }
-    }
+          
+      .row-no-padding {
+        [class*="col-"] {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+      }
         
     </style>
-    
-    
-
     
     <script>
 
@@ -92,8 +107,9 @@
     }
     
     </script>
-    
-    
+
+
+
     
 
 </head>
@@ -114,7 +130,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="http://placehold.it/150x50&text=Logo" alt="">
+                    <img src="headerLogo.png" alt="logo">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -145,7 +161,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Twitter Social Corelation Index Graph</h1>
+                    <h1 class="page-header"></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -153,7 +169,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">
+                        <div style="background-color: #2157a7; border-color: #2157a7" class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-6 text-right">
                                     <i class="fa  fa-twitter  fa-5x"></i>
@@ -197,7 +213,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
-                        <div class="panel-heading">
+                        <div style="background-color: #d62027; border-color: #d62027" class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
                                     <i class="fa  fa-globe   fa-5x"></i>

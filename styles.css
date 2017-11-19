@@ -2,6 +2,10 @@
 	background-color: black;
 }
 
+.panel-red{
+	background-color: red;
+}
+
 .title-bar{
 	background-color: #0052c2;
 	margin: 0px;

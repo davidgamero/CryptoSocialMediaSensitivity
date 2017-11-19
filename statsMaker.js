@@ -134,6 +134,10 @@ function arraySum(a){
   return a.reduce(function(sum,value){return sum + value});
 }
 
+function twoDec(num) {
+    var with2Decimals = num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+    return with2Decimals;
+}
 
 function updateIndicator(){
   indicatorData = [];
@@ -158,7 +162,7 @@ function updateIndicator(){
     
   document.getElementById('offset').value = indicatorOffset;
 
-  document.getElementById('socialCorrIndex').innerHTML = 0.01 * Math.round(100.0* getPearsonCorrelation(priceDataSet.data,indicatorData));
+  document.getElementById('socialCorrIndex').innerHTML = twoDec(getPearsonCorrelation(priceDataSet.data,indicatorData));
     
 }
 
