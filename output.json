@@ -1,1 +1,65 @@
-json={"index":{"0":319,"1":397,"2":192,"3":229,"4":237},"RT":{"0":2,"1":1,"2":1,"3":0,"4":0},"created_at":{"0":"Sun Nov 19 15:10:51","1":"Sun Nov 19 15:11:13","2":"Sun Nov 19 15:10:08","3":"Sun Nov 19 15:10:16","4":"Sun Nov 19 15:10:18"},"favourites":{"0":129606,"1":127103,"2":61687,"3":59809,"4":49813},"followers":{"0":2973,"1":5630,"2":104699,"3":79908,"4":10297},"profile_pic":{"0":"http:\/\/pbs.twimg.com\/profile_images\/482725324468142080\/ZQlbTEFR_normal.jpeg","1":"http:\/\/pbs.twimg.com\/profile_images\/882223198976098306\/B04nThcd_normal.jpg","2":"http:\/\/pbs.twimg.com\/profile_images\/854583942288199680\/XZyObcfs_normal.jpg","3":"http:\/\/pbs.twimg.com\/profile_images\/724971009460285440\/F9F2Kbrh_normal.jpg","4":"http:\/\/pbs.twimg.com\/profile_images\/724965959975460864\/9wsRf-cF_normal.jpg"},"text":{"0":"RT @satoshifinder: Hong Kong Bitcoin Businesses are Frozen Out of Banking https:\/\/t.co\/gjAWYdArx4 #Bitcoin","1":"RT @minorhash: Bitcoin, Blockchain Forks &amp; Lightning - Computerphile  https:\/\/t.co\/qYQJ99aRQa https:\/\/t.co\/W0zxRCeH8V","2":"RT @PablodelaMac: Bitcoin has gone berserk this year and has all the elements of extreme optimism -- Heard on the Street\u2026 ","3":"Read about how @refindcom is adding relevance to #content &amp; how to get your free 20 coins \u27a1\ufe0f\u2026 https:\/\/t.co\/kTNguA8VS6","4":"Read about how @refindcom is adding relevance to #content &amp; how to get your free 20 coins \u27a1\ufe0f\u2026 https:\/\/t.co\/JPWJ1QX3Jh"},"user_name":{"0":"BenefitVBurden","1":"arichduvet","2":"memobarba","3":"CooeeVisual","4":"CooeeNetwork"},"z":{"0":129608,"1":127104,"2":61688,"3":59809,"4":49813}}
+json={
+  "index": {
+    "0": 319,
+    "1": 397,
+    "2": 192,
+    "3": 229,
+    "4": 237
+  },
+  "RT": {
+    "0": 2,
+    "1": 1,
+    "2": 1,
+    "3": 0,
+    "4": 0
+  },
+  "created_at": {
+    "0": "Sun Nov 19 15:10:51",
+    "1": "Sun Nov 19 15:11:13",
+    "2": "Sun Nov 19 15:10:08",
+    "3": "Sun Nov 19 15:10:16",
+    "4": "Sun Nov 19 15:10:18"
+  },
+  "favourites": {
+    "0": 129606,
+    "1": 127103,
+    "2": 61687,
+    "3": 59809,
+    "4": 49813
+  },
+  "followers": {
+    "0": 2973,
+    "1": 5630,
+    "2": 104699,
+    "3": 79908,
+    "4": 10297
+  },
+  "profile_pic": {
+    "0": "http:\/\/pbs.twimg.com\/profile_images\/482725324468142080\/ZQlbTEFR_normal.jpeg",
+    "1": "http:\/\/pbs.twimg.com\/profile_images\/482725324468142080\/ZQlbTEFR_normal.jpeg",
+    "2": "http:\/\/pbs.twimg.com\/profile_images\/482725324468142080\/ZQlbTEFR_normal.jpeg",
+    "3": "http:\/\/pbs.twimg.com\/profile_images\/482725324468142080\/ZQlbTEFR_normal.jpeg",
+    "4": "http:\/\/pbs.twimg.com\/profile_images\/482725324468142080\/ZQlbTEFR_normal.jpeg"
+  },
+  "text": {
+    "0": "RT @satoshifinder: Hong Kong Bitcoin Businesses are Frozen Out of Banking https:\/\/t.co\/gjAWYdArx4 #Bitcoin",
+    "1": "RT @minorhash: Bitcoin, Blockchain Forks &amp; Lightning - Computerphile  https:\/\/t.co\/qYQJ99aRQa https:\/\/t.co\/W0zxRCeH8V",
+    "2": "RT @PablodelaMac: Bitcoin has gone berserk this year and has all the elements of extreme optimism -- Heard on the Street\u2026 ",
+    "3": "Read about how @refindcom is adding relevance to #content &amp; how to get your free 20 coins \u27a1\ufe0f\u2026 https:\/\/t.co\/kTNguA8VS6",
+    "4": "Read about how @refindcom is adding relevance to #content &amp; how to get your free 20 coins \u27a1\ufe0f\u2026 https:\/\/t.co\/JPWJ1QX3Jh"
+  },
+  "user_name": {
+    "0": "BenefitVBurden",
+    "1": "arichduvet",
+    "2": "memobarba",
+    "3": "CooeeVisual",
+    "4": "CooeeNetwork"
+  },
+  "z": {
+    "0": 129608,
+    "1": 127104,
+    "2": 61688,
+    "3": 59809,
+    "4": 49813
+  }
+}
